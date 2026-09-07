@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  mqtt_subscriber:
+    build: .
+    command: python mqtt_subscriber.py
+    volumes:
+      - ./backend:/app
+    restart: unless-stopped
+
+  api:
+    build: .
+    command: uvicorn api:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - mqtt_subscriber
+    restart: unless-stopped
+
+  dashboard:
+    build: .
+    command: streamlit run dashboard.py --server.port 8501 --server.address 0.0.0.0
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - api
+    restart: unless-stopped
