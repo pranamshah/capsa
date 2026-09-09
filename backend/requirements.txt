@@ -1,9 +1,0 @@
-paho-mqtt
-fastapi
-uvicorn
-pandas
-numpy
-scikit-learn
-tensorflow
-streamlit
-requests

@@ -1,0 +1,7 @@
+numpy
+scipy
+PyWavelets
+scikit-learn
+matplotlib
+Pillow
+tensorflow
